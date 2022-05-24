@@ -6,10 +6,6 @@ const UserSchema = Schema({
         type: String,
         required: [true, 'Name is required']
     },
-    lastname:{
-        type: String,
-        required: [true, 'Lastname is required']
-    },
     email:{
         type: String,
         required: [true, 'Email is required']
@@ -21,7 +17,10 @@ const UserSchema = Schema({
     phone:{
         type: String,
     },
-
+    rol: {
+        type: String,
+        required: [true, 'Rol is required'],
+    }
 })
 
 UserSchema.methods.toJSON = function(){

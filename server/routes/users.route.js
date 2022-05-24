@@ -2,7 +2,7 @@ const { Router } = require('express')
 const { check } = require('express-validator')
 
 const { register, login, meToken, userUpdate } = require('../controllers/users.controller')
-const { emailExist, idUserExist } = require('../helpers/db-validators')
+const { emailExist, idUserExist, validRol } = require('../helpers/db-validators')
 const validarCampos = require('../middlewares/validar-campos')
 const { validarJWT } = require('../middlewares/validar-jwt')
 
@@ -13,6 +13,7 @@ router.post('/register', [
     check('email', 'Is not a valid email').isEmail(),
     check('email').custom(emailExist),
     check('password', 'Password has to be at least 6 characters').isLength({ min: 6 }),
+    check('rol').custom(validRol),
     validarCampos
 ], register)
 
@@ -23,11 +24,11 @@ router.post('/login', [
     validarCampos
 ], login)
 
-router.put('/profile/:id', [
-    check('id', 'Not a valid ID').isMongoId(),
-    check('id').custom(idUserExist),
-    validarCampos
-], userUpdate)
+// router.put('/profile/:id', [
+//     check('id', 'Not a valid ID').isMongoId(),
+//     check('id').custom(idUserExist),
+//     validarCampos
+// ], userUpdate)
 
 
 router.get('/me', [

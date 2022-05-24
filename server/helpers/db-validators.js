@@ -1,5 +1,5 @@
 const User = require('../models/users.model')
-const Report = require('../models/reports.model')
+const Rol = require('../models/roles')
 
 
 const emailExist = async ( email = '' ) => {
@@ -11,14 +11,6 @@ const emailExist = async ( email = '' ) => {
         }
 }
 
-const idReportExist = async ( id ) => {
-
-    const existeReport = await Report.findById(id)
-
-    if (!existeReport) {
-        throw new Error(`The id ${id} doesn't exist`)
-        }
-}
 
 const idUserExist = async ( id ) => {
 
@@ -29,8 +21,15 @@ const idUserExist = async ( id ) => {
         }
 }
 
+const validRol = async(rol="") => {
+    const existRol = await Rol.findOne({rol})
+    if(!existRol){
+        throw new Error(`${rol} is not registered in DB`)
+    }
+}
+
 module.exports = {
     emailExist,
-    idReportExist,
-    idUserExist
+    idUserExist,
+    validRol
 }

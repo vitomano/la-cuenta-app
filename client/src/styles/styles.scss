@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&family=Roboto:wght@100;400;700&display=swap');
+
+//Base
+@import './base/variables';
+@import './base/base';
+@import './base/margin';
+@import './base/mixin';
+
+
+//Components
+@import './components/spinner';
